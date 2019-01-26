@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule }    from '@angular/common/http';
 import { ReactiveFormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';  //<<<< import it here
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +33,8 @@ import { RouteGuard } from './route-guard';
     AppRoutingModule,
     ChartsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [LoginService, RouteGuard, AppService],
   bootstrap: [AppComponent]

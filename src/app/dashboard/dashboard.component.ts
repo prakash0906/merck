@@ -6,10 +6,12 @@ import { AppService } from '../app-service.service'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  public to = (new Date()).setHours(0,0,0,0);
+  public from = (new Date()).setHours(23,59,59,1);
+  public interval: number;
   public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+    {data: [], label: 'Temperature (C)'},
+    {data: [], label: 'Humidity(%)'}
   ];
   public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions:any = {
@@ -43,11 +45,13 @@ export class DashboardComponent implements OnInit {
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
- 
+ todayTime = [];
  constructor(private appService:AppService) {}
 
 ngOnInit() {
   this.getRecords();
+
+
 }
 
   public randomize():void {
@@ -70,9 +74,23 @@ ngOnInit() {
     console.log(e);
   }
 
-  private getRecords() {
+public submit() {
+  console.log(this.to, this.from);
+  this.getRecords();
+}
+  public getRecords() {
+    this.todayTime = []
+    this.lineChartLabels= [];
+  for(let i =1; i<= 24; i++) {
+    this.lineChartLabels.push(i + ' Hr');
+    this.todayTime.push((new Date()).setHours(i-1,0,0,0));
+    this.lineChartData[0].data.push(parseInt('' + (Math.random() * 10)))
+    this.lineChartData[1].data.push(parseInt('' + (Math.random() * 10)))
+  }
     this.appService.getRecord().subscribe((response) => {
       console.log("response ", response);
+      response.forEach((item) => {
+      })
     })
   }
 }
