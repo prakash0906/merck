@@ -1,8 +1,9 @@
 <div class="header">
-  <a href="#default" class="logo">MERCK</a>
+  <a routeLink="/dashboard" class="logo cursor-pointer">MERCK</a>
+<!--   <div class="header-left">
+    <a class="active" routeLink="/dashboard">Dashboard</a>
+  </div> -->
   <div class="header-right">
-    <a class="active" href="#home">Home</a>
-    <a href="#contact">Contact</a>
-    <a (click)="doLogout()">Logout</a>
+    <a (click)="doLogout()" class="cursor-pointer">Logout</a>
   </div>
 </div>
